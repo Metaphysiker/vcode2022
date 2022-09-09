@@ -44,7 +44,7 @@ export default class extends Controller {
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
     current_width = width;
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
-    let height = width;
+    let height = this.animationFieldTarget.offsetHeight; //width;
 
     let box = {width: width/1.5, height: width/1.5};
 
