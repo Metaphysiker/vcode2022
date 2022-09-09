@@ -55,5 +55,23 @@ export default class extends Controller {
        .attr("height", height)
        .append("g")
        .attr("transform", `translate(${width/2}, ${margin.top})`);
+
+       const website_screen = svg.append('g')
+                        .attr("transform", `translate(${-box.width/2}, ${0})`);
+
+website_screen.append('rect')
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr('width', 0)
+  .attr('height', 0)
+  //.attr('stroke', 'black')
+  .attr('fill', 'white')
+  .transition()
+    .duration(1000)
+    .attr('width', box.width)
+    .attr('height', box.height)
+    .attr("fill", "#69a3b2")
+    .on("end", function() {console.log("end")});
+
   }
 }
