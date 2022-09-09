@@ -2,6 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import { useIntersection, useResize } from 'stimulus-use'
 //import * as d3 from "d3"
 
+var current_width = 0;
 
 export default class extends Controller {
   static targets = [ "name", "output", "animationField" ]
@@ -29,10 +30,17 @@ export default class extends Controller {
     this.draw();
   }
 
+  resize({ width }) {
+    console.log("resize");
+    if(current_width !== this.animationFieldTarget.offsetWidth){
+      this.draw();
+    }
+
+  }
+
   draw(){
-    console.log("draw");
-    console.log(d3);
-    console.log(this.animationFieldTarget.offsetWidth);
+    current_width = this.animationFieldTarget.offsetWidth;
+    this.animationFieldTarget.innerHTML = "";
     let margin = {top: 50, right: 50, bottom: 50, left: 50};
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
