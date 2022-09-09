@@ -39,10 +39,10 @@ export default class extends Controller {
   }
 
   draw(){
-    current_width = this.animationFieldTarget.offsetWidth;
     this.animationFieldTarget.innerHTML = "";
     let margin = {top: 50, right: 50, bottom: 50, left: 50};
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
+    current_width = width;
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
     let height = width;
 
@@ -59,19 +59,20 @@ export default class extends Controller {
        const website_screen = svg.append('g')
                         .attr("transform", `translate(${-box.width/2}, ${0})`);
 
-website_screen.append('rect')
-  .attr("x", 0)
-  .attr("y", 0)
-  .attr('width', 0)
-  .attr('height', 0)
-  //.attr('stroke', 'black')
-  .attr('fill', 'white')
-  .transition()
-    .duration(1000)
-    .attr('width', box.width)
-    .attr('height', box.height)
-    .attr("fill", "#69a3b2")
-    .on("end", function() {console.log("end")});
+        website_screen.append('rect')
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr('width', 0)
+          .attr('height', 0)
+          .attr('fill', 'white')
+          .transition()
+            .duration(2000)
+            .attr('width', box.width)
+            .attr('height', box.height)
+            .attr("fill", "#69a3b2")
+            .on("end", function() {console.log("end")});
+            // end website_screen
 
-  }
+
+  } //end of draw
 }

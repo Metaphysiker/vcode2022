@@ -1,6 +1,6 @@
 <%= render "layouts/navigation" %>
 
-<div class="container">
+<main class="container">
   <div class="card p-3 my-3">
 
     <div class="card-body">
@@ -10,32 +10,38 @@
     </div>
   </div>
 
+  <h2>Dienstleistungen</h2>
+
   <div class="card p-3 my-3">
+    <h3>Webseite</h3>
+    <hr />
     <div data-controller="new-website-animation">
-      <input data-new-website-animation-target="name" type="text">
 
-      <button data-action="click->new-website-animation#greet">
-        Greet
-      </button>
-
-      <span data-new-website-animation-target="output">
-      </span>
-      <hr />
       <div data-new-website-animation-target="animationField">
       </div>
     </div>
   </div>
 
-</div>
+  <div class="card p-3 my-3">
+    <h3>Automatisierungen</h3>
+    <hr />
+    <div data-controller="new-website-animation">
 
-
-
-<main class="flex-shrink-0">
-  <div class="container">
-    <h1 class="mt-5">Sticky footer</h1>
-    <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS.</p>
-    <p>Use <a href="/docs/5.2/examples/sticky-footer-navbar/">the sticky footer with a fixed navbar</a> if need be, too.</p>
+      <div data-new-website-animation-target="animationField">
+      </div>
+    </div>
   </div>
+
+  <div class="card p-3 my-3">
+    <h3>Tests</h3>
+    <hr />
+    <div data-controller="new-website-animation">
+
+      <div data-new-website-animation-target="animationField">
+      </div>
+    </div>
+  </div>
+
 </main>
 
 
