@@ -137,7 +137,7 @@ export default class extends Controller {
           .append("xhtml:div")
           .attr("class", "")
           .style("opacity", 0.0)
-          .html(`<div class="text-center text-white"><h4><b>Willkommen!</b></h4></div>`)
+          .html(`<div class="text-center text-white" style="font-size: ${width/33}px;"><b>Willkommen!</b></div>`)
           .transition()
                 .duration(1000)
                 .style("opacity", 1.0)
@@ -217,8 +217,12 @@ export default class extends Controller {
         .attr('width', box.width/100 * 10)
         .attr('height', box.height/100 * 4.5)
         .style("cursor", "pointer")
-        .style("opacity", 1)
-        .attr("xlink:href", svgUrl);
+        .style("opacity", 0)
+        .attr("xlink:href", svgUrl)
+        .transition()
+              .duration(1000)
+              .style("opacity", 1.0)
+              .on("end", function() {final_resolve()});
 
 
         website_screen.append("text")
@@ -309,7 +313,7 @@ export default class extends Controller {
             .append("xhtml:div")
             .attr("class", "")
             .style("opacity", 1.0)
-            .html(`<div class="text-center"><button type="button" class="btn btn-light">Loslegen!</button></div>`);
+            .html(`<div class="text-center"><button type="button" class="btn btn-light" style="font-size: ${width/33}px;">Loslegen!</button></div>`);
 
         })
     }
