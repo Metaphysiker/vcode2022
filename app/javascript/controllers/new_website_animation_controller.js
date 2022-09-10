@@ -7,6 +7,8 @@ export default class extends Controller {
   static values = { index: Number, drawn: Boolean, currentWidth: Number, svgUrl: String }
 
   connect() {
+    this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth; + "px";
+
     this.currentWidthValue = this.animationFieldTarget.offsetWidth;
 
     import("d3").then(d3 => {
@@ -48,7 +50,8 @@ export default class extends Controller {
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
     this.currentWidthValue = width;
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
-    let height = this.animationFieldTarget.offsetHeight; //width;
+    let height = width; //this.animationFieldTarget.offsetHeight; //width;
+    this.animationFieldTarget.style.height = width + "px";
 
     let box = {width: width/1.5, height: width/1.5};
     let svgUrl = this.svgUrlValue;
@@ -90,9 +93,9 @@ export default class extends Controller {
       return new Promise(function(final_resolve, final_reject){
 
       website_screen.append("text")
-        .attr("font-weight", 900)
+        .attr("font-weight", 500)
         .style('fill', 'white')
-        .style("font-size", "1.8em")
+        .style("font-size", width/20)
         .attr("x", 0)
         .attr("y", 0)
         .text("webtastic")
@@ -156,7 +159,7 @@ export default class extends Controller {
 
         website_screen.append("text")
           .attr("font-weight", 900)
-          .style("font-size", "1em")
+          .style("font-size", width/25)
           .style('fill', 'white')
           .attr("x", 0)
           .attr("y", 0)
