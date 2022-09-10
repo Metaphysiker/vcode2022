@@ -4,7 +4,7 @@ import { useIntersection, useResize } from 'stimulus-use'
 
 export default class extends Controller {
   static targets = [ "name", "output", "animationField" ]
-  static values = { index: Number, drawn: Boolean, currentWidth: Number, svgUrl: String }
+  static values = { index: Number, drawn: Boolean, currentWidth: Number, svgUrl: String, cardTextUrl: String, listTaskUrl: String, imageUrl: String }
 
   connect() {
     this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth; + "px";
@@ -43,7 +43,7 @@ export default class extends Controller {
   draw(){
     this.drawnValue = true;
     this.animationFieldTarget.innerHTML = "";
-    let margin = {top: 50, right: 50, bottom: 50, left: 50};
+    let margin = {top: 5, right: 5, bottom: 5, left: 5};
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
     this.currentWidthValue = width;
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
@@ -52,6 +52,9 @@ export default class extends Controller {
 
     let box = {width: width/1.5, height: width/1.5};
     let svgUrl = this.svgUrlValue;
+    let cardTextUrl = this.cardTextUrlValue;
+    let listTaskUrl = this.listTaskUrlValue;
+    let imageUrl = this.imageUrlValue;
 
     // append the svg object to the body of the page
      const svg = d3.select(this.animationFieldTarget)
@@ -91,12 +94,13 @@ export default class extends Controller {
       return new Promise(function(final_resolve, final_reject){
 
       website_screen.append("text")
-        .attr("font-weight", 500)
+        .attr("font-weight", 900)
         .style('fill', 'white')
+        .style('text-decoration-style', "solid")
         .style("font-size", width/20)
         .attr("x", 0)
         .attr("y", 0)
-        .text("webtastic")
+        .text("Willkommen!")
         .transition()
               .duration(1000)
               .attr("x", box.width/100 * 10)
@@ -180,16 +184,16 @@ export default class extends Controller {
 
 
         website_screen.append("text")
-          .attr("font-weight", 900)
-          .style("font-size", width/25)
+          .attr("font-weight", 500)
+          .style("font-size", width/33)
           .style('fill', 'white')
           .attr("x", 0)
           .attr("y", 0)
-          .text("brand")
+          .text("Logo")
           .transition()
                 .duration(1000)
                 .attr("x", box.width/100 * 10)
-                .attr("y", box.height/100 * 5.5)
+                .attr("y", box.height/100 * 5)
                 .on("end", function() {final_resolve()});
       })
 
@@ -199,32 +203,69 @@ export default class extends Controller {
 
       return new Promise(function(final_resolve, final_reject){
 
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 10)
+        .attr('y', box.height/100 * 25)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 1)
+        .attr("xlink:href", listTaskUrl);
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 40)
+        .attr('y', box.height/100 * 25)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 1)
+        .attr("xlink:href", imageUrl);
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 10)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 1)
+        .attr("xlink:href", cardTextUrl);
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 40)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 1)
+        .attr("xlink:href", cardTextUrl);
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 70)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 1)
+        .attr("xlink:href", cardTextUrl);
+
       const button = website_screen.append('g')
         .attr("transform", `translate(${box.width/100 * 25}, ${box.height/100 * 80})`);
 
       //var button = website_screen.append('rect');
 
-        button
-                .append('rect')
-                .attr("x", 0)
-                .attr("y", 0)
-                .attr('width', 0)
-                .attr('height', 0)
-                .attr("rx", 10)
-                .attr('fill', 'LightGray')
-                .transition()
-                  .duration(1000)
-                  .attr('width', box.width/100 * 50)
-                  .attr('height', box.height/100 * 15)
-                  .on("end", function() {final_resolve()});
 
-        button.append("text")
-          .attr("font-weight", 500)
-          .style('fill', 'white')
-          .style("font-size", width/20)
-          .attr("x", 0)
-          .attr("y", box.height/100 * 7.5)
-          .text("Loslegen!")
+
+          button.append("foreignObject")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr('width', box.width/100 * 50)
+            .attr('height', box.height/100 * 15)
+            .append("xhtml:div")
+            .attr("class", "")
+            .style("opacity", 1.0)
+            .html(`<div class="text-center"><button type="button" class="btn btn-light">Let's Go</button></div>`);
+
         })
     }
 
