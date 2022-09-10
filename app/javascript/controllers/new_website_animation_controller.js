@@ -56,6 +56,7 @@ export default class extends Controller {
     let listTaskUrl = this.listTaskUrlValue;
     let imageUrl = this.imageUrlValue;
     let textCenterUrl = this.textCenterUrlValue;
+    let durationSpeed = 600;
 
     // append the svg object to the body of the page
      const svg = d3.select(this.animationFieldTarget)
@@ -75,24 +76,101 @@ export default class extends Controller {
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
-            .duration(1000)
+            .duration(durationSpeed)
             .attr('width', box.width)
             .attr('height', box.height)
             .attr("fill", "#69a3b2")
             .on("end", function() {
               //append_navbar(append_title)
-              append_navbar()
-              .then(() => append_sections())
+              append_sections()
               .then(() => append_navbar_brand())
-              .then(() => append_navbar_menu())
+              //.then(() => append_navbar_menu())
               .then(() => append_title())
+              .then(() => append_first_row())
+              .then(() => append_second_row())
               .then(() => append_button())
               .then(() => console.log("finish"));
             });
             // end website_screen
 
+    function append_first_row() {
+      return new Promise(function(final_resolve, final_reject){
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 40)
+        .attr('y', box.height/100 * 25)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 0)
+        .attr("xlink:href", textCenterUrl)
+        .transition()
+              .duration(durationSpeed)
+              .style("opacity", 1)
+              .on("end", function() {final_resolve()});
+
+      }) // end promise
+    } // end append_first_row
+
+    function append_second_row() {
+      return new Promise(function(final_resolve, final_reject){
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 10)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 0)
+        .attr("xlink:href", listTaskUrl)
+        .transition()
+                      .duration(durationSpeed)
+                      .style("opacity", 1)
+                      .on("end", function() {});
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 40)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 0)
+        .attr("xlink:href", cardTextUrl)
+        .transition()
+                      .duration(durationSpeed)
+                      .style("opacity", 1)
+                      .on("end", function() {});
+
+        website_screen.append("svg:image")
+        .attr('x', box.width/100 * 70)
+        .attr('y', box.height/100 * 50)
+        .attr('width', box.width/100 * 20)
+        .attr('height', box.height/100 * 20)
+        .style("cursor", "pointer")
+        .style("opacity", 0)
+        .attr("xlink:href", imageUrl)
+        .transition()
+                      .duration(durationSpeed)
+                      .style("opacity", 1)
+                      .on("end", function() {final_resolve()});
+
+      }) // end promise
+    } // end append_secnd_row
+
     function append_sections() {
       return new Promise(function(final_resolve, final_reject){
+
+        website_screen.append('rect')
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr('width', box.width/100 * 100)
+          .attr('height', 0)
+          .attr('fill', 'gray')
+          .transition()
+            .duration(durationSpeed)
+            .attr('width', box.width/100 * 100)
+            .attr('height', box.height/100 * 7.5)
+            .on("end", function() {final_resolve()});
 
         website_screen.append('rect')
           .attr("x", 0)
@@ -101,7 +179,7 @@ export default class extends Controller {
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
-            .duration(1000)
+            .duration(durationSpeed)
             .attr('width', box.width)
             .attr('height', box.height/100 * 25)
             .attr("fill", "LightBlue")
@@ -115,7 +193,7 @@ export default class extends Controller {
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
-            .duration(1000)
+            .duration(durationSpeed)
             .attr('width', box.width)
             .attr('height', box.height/100 * 25)
             .attr("fill", "LightBlue")
@@ -137,9 +215,9 @@ export default class extends Controller {
           .append("xhtml:div")
           .attr("class", "")
           .style("opacity", 0.0)
-          .html(`<div class="text-center text-white" style="font-size: ${width/33}px;"><b>Willkommen!</b></div>`)
+          .html(`<div class="text-center text-white" style="font-size: ${width/20}px;"><b>Willkommen!</b></div>`)
           .transition()
-                .duration(1000)
+                .duration(durationSpeed)
                 .style("opacity", 1.0)
                 .on("end", function() {final_resolve()});
 
@@ -150,17 +228,7 @@ export default class extends Controller {
     function append_navbar(){
 
       return new Promise(function(final_resolve, final_reject){
-        website_screen.append('rect')
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr('width', 0)
-          .attr('height', 0)
-          .attr('fill', 'gray')
-          .transition()
-            .duration(1000)
-            .attr('width', box.width/100 * 100)
-            .attr('height', box.height/100 * 7.5)
-            .on("end", function() {final_resolve()});
+
       })
 
     }
@@ -175,7 +243,7 @@ export default class extends Controller {
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
-            .duration(1000)
+            .duration(durationSpeed)
             .attr('width', box.width/100 * 6)
             .attr('height', box.height/100 * 1)
             .on("end", function() {});
@@ -187,7 +255,7 @@ export default class extends Controller {
             .attr('height', 0)
             .attr('fill', 'white')
             .transition()
-              .duration(1000)
+              .duration(durationSpeed)
               .attr('width', box.width/100 * 6)
               .attr('height', box.height/100 * 1)
               .on("end", function() {});
@@ -199,7 +267,7 @@ export default class extends Controller {
               .attr('height', 0)
               .attr('fill', 'white')
               .transition()
-                .duration(1000)
+                .duration(durationSpeed)
                 .attr('width', box.width/100 * 6)
                 .attr('height', box.height/100 * 1)
                 .on("end", function() {final_resolve()});
@@ -220,7 +288,7 @@ export default class extends Controller {
         .style("opacity", 0)
         .attr("xlink:href", svgUrl)
         .transition()
-              .duration(1000)
+              .duration(durationSpeed)
               .style("opacity", 1.0)
               .on("end", function() {final_resolve()});
 
@@ -229,14 +297,16 @@ export default class extends Controller {
           .attr("font-weight", 500)
           .style("font-size", width/33)
           .style('fill', 'white')
-          .attr("x", 0)
-          .attr("y", 0)
+          .style("opacity", 0)
+          .attr("x", box.width/100 * 10)
+          .attr("y", box.height/100 * 5)
           .text("Logo")
           .transition()
-                .duration(1000)
-                .attr("x", box.width/100 * 10)
-                .attr("y", box.height/100 * 5)
+                .duration(durationSpeed)
+                .style("opacity", 1)
                 .on("end", function() {final_resolve()});
+
+        append_navbar_menu();
       })
 
     }
@@ -245,58 +315,6 @@ export default class extends Controller {
 
       return new Promise(function(final_resolve, final_reject){
 
-
-        website_screen.append("svg:image")
-        .attr('x', box.width/100 * 40)
-        .attr('y', box.height/100 * 25)
-        .attr('width', box.width/100 * 20)
-        .attr('height', box.height/100 * 20)
-        .style("cursor", "pointer")
-        .style("opacity", 0)
-        .attr("xlink:href", textCenterUrl)
-        .transition()
-              .duration(1000)
-              .style("opacity", 1)
-              .on("end", function() {final_resolve()});
-
-        website_screen.append("svg:image")
-        .attr('x', box.width/100 * 10)
-        .attr('y', box.height/100 * 50)
-        .attr('width', box.width/100 * 20)
-        .attr('height', box.height/100 * 20)
-        .style("cursor", "pointer")
-        .style("opacity", 0)
-        .attr("xlink:href", listTaskUrl)
-        .transition()
-                      .duration(1000)
-                      .style("opacity", 1)
-                      .on("end", function() {});
-
-        website_screen.append("svg:image")
-        .attr('x', box.width/100 * 40)
-        .attr('y', box.height/100 * 50)
-        .attr('width', box.width/100 * 20)
-        .attr('height', box.height/100 * 20)
-        .style("cursor", "pointer")
-        .style("opacity", 0)
-        .attr("xlink:href", cardTextUrl)
-        .transition()
-                      .duration(1000)
-                      .style("opacity", 1)
-                      .on("end", function() {});
-
-        website_screen.append("svg:image")
-        .attr('x', box.width/100 * 70)
-        .attr('y', box.height/100 * 50)
-        .attr('width', box.width/100 * 20)
-        .attr('height', box.height/100 * 20)
-        .style("cursor", "pointer")
-        .style("opacity", 0)
-        .attr("xlink:href", imageUrl)
-        .transition()
-                      .duration(1000)
-                      .style("opacity", 1)
-                      .on("end", function() {});
 
       const button = website_screen.append('g')
         .attr("transform", `translate(${box.width/100 * 25}, ${box.height/100 * 80})`);
@@ -312,8 +330,12 @@ export default class extends Controller {
             .attr('height', box.height/100 * 15)
             .append("xhtml:div")
             .attr("class", "")
-            .style("opacity", 1.0)
-            .html(`<div class="text-center"><button type="button" class="btn btn-light" style="font-size: ${width/33}px;">Loslegen!</button></div>`);
+            .style("opacity", 0)
+            .html(`<div class="text-center"><button type="button" class="btn btn-light" style="font-size: ${width/25}px;">Loslegen!</button></div>`)
+            .transition()
+                  .duration(durationSpeed)
+                  .style("opacity", 1.0)
+                  .on("end", function() {final_resolve()});
 
         })
     }
