@@ -26,17 +26,14 @@ export default class extends Controller {
   }
 
   appear(entry){
-    console.log("appear");
-    console.log(this.drawnValue);
+
     if(!this.drawnValue){
       this.draw();
     }
   }
 
   resize({ width }) {
-    console.log(width);
-    console.log(this.animationFieldTarget.offsetWidth);
-    console.log("resize");
+
     if(this.currentWidthValue !== width){
       this.draw();
     }
@@ -74,7 +71,7 @@ export default class extends Controller {
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
-            .duration(2000)
+            .duration(1000)
             .attr('width', box.width)
             .attr('height', box.height)
             .attr("fill", "#69a3b2")
@@ -84,6 +81,7 @@ export default class extends Controller {
               .then(() => append_navbar_brand())
               .then(() => append_navbar_menu())
               .then(() => append_title())
+              .then(() => append_button())
               .then(() => console.log("finish"));
             });
             // end website_screen
@@ -130,15 +128,39 @@ export default class extends Controller {
       return new Promise(function(final_resolve, final_reject){
         website_screen.append('rect')
           .attr("x", box.width/100 * 90)
-          .attr("y", 0)
+          .attr("y", box.width/100 * 1.5)
           .attr('width', 0)
           .attr('height', 0)
           .attr('fill', 'white')
           .transition()
             .duration(1000)
-            .attr('width', box.width/100 * 10)
-            .attr('height', box.height/100 * 1.5)
-            .on("end", function() {final_resolve()});
+            .attr('width', box.width/100 * 6)
+            .attr('height', box.height/100 * 1)
+            .on("end", function() {});
+
+          website_screen.append('rect')
+            .attr("x", box.width/100 * 90)
+            .attr("y", box.width/100 * 3.5)
+            .attr('width', 0)
+            .attr('height', 0)
+            .attr('fill', 'white')
+            .transition()
+              .duration(1000)
+              .attr('width', box.width/100 * 6)
+              .attr('height', box.height/100 * 1)
+              .on("end", function() {});
+
+            website_screen.append('rect')
+              .attr("x", box.width/100 * 90)
+              .attr("y", box.width/100 * 5.5)
+              .attr('width', 0)
+              .attr('height', 0)
+              .attr('fill', 'white')
+              .transition()
+                .duration(1000)
+                .attr('width', box.width/100 * 6)
+                .attr('height', box.height/100 * 1)
+                .on("end", function() {final_resolve()});
       })
 
     }
@@ -171,6 +193,39 @@ export default class extends Controller {
                 .on("end", function() {final_resolve()});
       })
 
+    }
+
+    function append_button() {
+
+      return new Promise(function(final_resolve, final_reject){
+
+      const button = website_screen.append('g')
+        .attr("transform", `translate(${box.width/100 * 25}, ${box.height/100 * 80})`);
+
+      //var button = website_screen.append('rect');
+
+        button
+                .append('rect')
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr('width', 0)
+                .attr('height', 0)
+                .attr("rx", 10)
+                .attr('fill', 'LightGray')
+                .transition()
+                  .duration(1000)
+                  .attr('width', box.width/100 * 50)
+                  .attr('height', box.height/100 * 15)
+                  .on("end", function() {final_resolve()});
+
+        button.append("text")
+          .attr("font-weight", 500)
+          .style('fill', 'white')
+          .style("font-size", width/20)
+          .attr("x", 0)
+          .attr("y", box.height/100 * 7.5)
+          .text("Loslegen!")
+        })
     }
 
 
