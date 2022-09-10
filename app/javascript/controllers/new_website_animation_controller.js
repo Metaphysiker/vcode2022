@@ -2,14 +2,12 @@ import { Controller } from "@hotwired/stimulus"
 import { useIntersection, useResize } from 'stimulus-use'
 //import * as d3 from "d3"
 
-var current_width = 0;
-
 export default class extends Controller {
   static targets = [ "name", "output", "animationField" ]
-
-
+  static values = { index: Number, drawn: Boolean, currentWidth: Number }
 
   connect() {
+    this.currentWidthValue = this.animationFieldTarget.offsetWidth;
 
     import("d3").then(d3 => {
       window.d3 = d3;
@@ -27,22 +25,28 @@ export default class extends Controller {
 
   appear(entry){
     console.log("appear");
-    this.draw();
+    console.log(this.drawnValue);
+    if(!this.drawnValue){
+      this.draw();
+    }
   }
 
   resize({ width }) {
+    console.log(width);
+    console.log(this.animationFieldTarget.offsetWidth);
     console.log("resize");
-    if(current_width !== this.animationFieldTarget.offsetWidth){
+    if(this.currentWidthValue !== width){
       this.draw();
     }
 
   }
 
   draw(){
+    this.drawnValue = true;
     this.animationFieldTarget.innerHTML = "";
     let margin = {top: 50, right: 50, bottom: 50, left: 50};
     let width = this.animationFieldTarget.offsetWidth;//$(container).width();
-    current_width = width;
+    this.currentWidthValue = width;
     //var height = (this.data.length * 100) + 100 - margin.top - margin.bottom;
     let height = this.animationFieldTarget.offsetHeight; //width;
 
