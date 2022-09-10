@@ -69,6 +69,9 @@ export default class extends Controller {
        const website_screen = svg.append('g')
                         .attr("transform", `translate(${-box.width/2}, ${0})`);
 
+      const button = website_screen.append('g')
+        .attr("transform", `translate(${box.width/100 * 25}, ${box.height/100 * 80})`);
+
         website_screen.append('rect')
           .attr("x", 0)
           .attr("y", 0)
@@ -89,7 +92,10 @@ export default class extends Controller {
               .then(() => append_first_row())
               .then(() => append_second_row())
               .then(() => append_button())
-              .then(() => console.log("finish"));
+              .then(() => {
+                seek_attention_for_button();
+                console.log("finish");
+              });
             });
             // end website_screen
 
@@ -312,18 +318,13 @@ export default class extends Controller {
     }
 
     function append_button() {
+      console.log("append_button");
+      console.log(button);
 
       return new Promise(function(final_resolve, final_reject){
 
-
-      const button = website_screen.append('g')
-        .attr("transform", `translate(${box.width/100 * 25}, ${box.height/100 * 80})`);
-
       //var button = website_screen.append('rect');
-
-
-
-          button.append("foreignObject")
+          button.raise().append("foreignObject")
             .attr("x", 0)
             .attr("y", 0)
             .attr('width', box.width/100 * 50)
@@ -331,14 +332,37 @@ export default class extends Controller {
             .append("xhtml:div")
             .attr("class", "")
             .style("opacity", 0)
-            .html(`<div class="text-center"><button type="button" class="btn btn-light" style="font-size: ${width/25}px;">Loslegen!</button></div>`)
+            .html(`<div class="text-center"><button type="button" class="btn btn-light" style="font-size: ${width/25}px;">Loslegen</button></div>`)
             .transition()
                   .duration(durationSpeed)
                   .style("opacity", 1.0)
                   .on("end", function() {final_resolve()});
 
+
         })
     }
+
+
+    function seek_attention_for_button(){
+
+      console.log("seek_attention_for_button");
+
+      button
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(750)
+      .attr("transform", `translate(${box.width/100 * 25 - 10}, ${box.height/100 * 80})`)
+      //.attr("x", -400)
+      .transition()
+      .ease(d3.easeLinear)
+      .duration(750)
+      //.attr("y", 200)
+      .attr("transform", `translate(${box.width/100 * 25 + 10}, ${box.height/100 * 80})`)
+      .on("end", function(){
+        seek_attention_for_button();
+      } );
+
+    } //end seek_attention_for_button
 
 
 
