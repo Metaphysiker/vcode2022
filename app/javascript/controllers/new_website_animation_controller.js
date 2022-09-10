@@ -350,19 +350,19 @@ export default class extends Controller {
       button
       .transition()
       .ease(d3.easeLinear)
-      .duration(750)
+      .duration(1500)
       .attr("transform", `translate(${box.width/100 * 25 - 10}, ${box.height/100 * 80})`)
       //.attr("x", -400)
       .transition()
       .ease(d3.easeLinear)
-      .duration(750)
+      .duration(1500)
       //.attr("y", 200)
       .attr("transform", `translate(${box.width/100 * 25 + 10}, ${box.height/100 * 80})`)
       .on("end", function(){
         seek_attention_for_button();
       } );
 
-    } //end seek_attention_for_button
+    } //end tention_for_button
 
 
 
