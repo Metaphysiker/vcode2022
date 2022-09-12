@@ -56,7 +56,7 @@ export default class extends Controller {
     let listTaskUrl = this.listTaskUrlValue;
     let imageUrl = this.imageUrlValue;
     let textCenterUrl = this.textCenterUrlValue;
-    let durationSpeed = 600;
+    let durationSpeed = 500;
 
     // append the svg object to the body of the page
      const svg = d3.select(this.animationFieldTarget)
