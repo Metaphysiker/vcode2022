@@ -36,7 +36,7 @@ export default class extends Controller {
     console.log(this.currentWidthValue);
     console.log(width);
     console.log(this.currentWidthValue !== width)
-    if(this.currentWidthValue !== width){
+    if(this.drawnValue && (this.currentWidthValue !== width)){
       console.log("WIDTH IS NOT SAME!");
       this.draw();
     }
