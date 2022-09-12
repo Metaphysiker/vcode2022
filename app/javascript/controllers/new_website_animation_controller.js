@@ -26,21 +26,25 @@ export default class extends Controller {
   }
 
   appear(entry){
-
+    console.log("appear");
     if(!this.drawnValue){
       this.draw();
     }
   }
 
   resize({ width }) {
-
+    console.log(this.currentWidthValue);
+    console.log(width);
+    console.log(this.currentWidthValue !== width)
     if(this.currentWidthValue !== width){
+      console.log("WIDTH IS NOT SAME!");
       this.draw();
     }
 
   }
 
   draw(){
+    console.log("draw");
     this.drawnValue = true;
     this.animationFieldTarget.innerHTML = "";
     let margin = {top: 5, right: 5, bottom: 5, left: 5};
@@ -94,7 +98,7 @@ export default class extends Controller {
               .then(() => append_button())
               .then(() => {
                 seek_attention_for_button();
-                console.log("finish");
+                //console.log("finish");
               });
             });
             // end website_screen
@@ -318,8 +322,8 @@ export default class extends Controller {
     }
 
     function append_button() {
-      console.log("append_button");
-      console.log(button);
+      //console.log("append_button");
+      //console.log(button);
 
       return new Promise(function(final_resolve, final_reject){
 
@@ -345,7 +349,7 @@ export default class extends Controller {
 
     function seek_attention_for_button(){
 
-      console.log("seek_attention_for_button");
+      //console.log("seek_attention_for_button");
 
       button
       .transition()
