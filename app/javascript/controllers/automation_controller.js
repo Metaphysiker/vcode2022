@@ -111,7 +111,8 @@ export default class extends Controller {
                     gear1
                         .transition()
                         .duration(2000)
-                        .attr("transform", `rotate(350)`);
+                        .attr('transform', `translate(0 0) rotate(-29 0 0)`)
+                        //.attr("transform", `rotate(350)`);
                 }
 
                 turnNeedle();
