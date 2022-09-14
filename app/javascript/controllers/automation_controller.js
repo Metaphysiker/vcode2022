@@ -69,6 +69,9 @@ export default class extends Controller {
         y: box.height/100 * 33,
         cx: box.width/100 * 50 + gear_size.width/2,
         cy: box.height/100 * 33 + gear_size.height/2,
+        id: "gear_1",
+        class: "gears",
+        rotating_class: "gears_rotate",
         group: undefined
       }
     ]
@@ -82,117 +85,57 @@ export default class extends Controller {
        .attr("transform", `translate(${0}, ${margin.top})`);
 
 
-       // guidodiepen.nl
+       for (let i = 0; i < gears.length; i++) {
+         var group1 = svg.append('g')
+                      .attr("transform", `translate(${gears[0]["x"]}, ${gears[0]["y"]})`)
+                      ;
+
+        var group2 = group1.append('g')
+                      .attr("class", gears[i]["rotating_class"]);
+
+        var group3 = group2
+                   .append("svg:image")
+                   .attr("transform", `translate(${-gear_size["width"]/2}, ${-gear_size["height"]/2})`)
+                   .attr('id', "group3")
+                   .attr('width', gear_size.width)
+                   .attr('height', gear_size.height)
+                   .style("cursor", "pointer")
+                   .style("opacity", 1)
+                   .attr("xlink:href", gearUrl);
 
 
-       var group1 = svg.append('g')
-                    .attr('id', "group1")
-                    .attr("transform", `translate(${gears[0]["x"]}, ${gears[0]["y"]})`)
-                    ;
+         group2.append('circle')
+                  .attr("transform", `translate(0,0)`)
+                  .attr('r', 3)
+                  .attr('stroke', 'black')
+                  .attr('fill', 'black');
 
-      var group2 = group1.append('g')
-                    .attr('id', "group2")
-                    //.attr("transform", `translate(${-gear_size["width"]/2}, ${-gear_size["height"]/2})`)
-
-                    //.attr("transform", `translate(${gears[0]["x"]}, ${gears[0]["y"]})`)
-                    ;
+        }
 
 
 
-     var group3 = group2
-                .append("svg:image")
-                .attr("transform", `translate(${-gear_size["width"]/2}, ${-gear_size["height"]/2})`)
-                .attr('id', "group3")
-                .attr('width', gear_size.width)
-                .attr('height', gear_size.height)
-                .style("cursor", "pointer")
-                .style("opacity", 1)
-                .attr("xlink:href", gearUrl);
-
-
-       function spin_geary(){
+       function spin_geary(selector){
          var random_number = Math.floor(Math.random() * 360);
 
-         //console.log("random_number");
-        // console.log(random_number);
-
-        //random_number = 360;
-
-         d3.select("#group2")
+         d3.select(selector)
          .transition()
          .ease(d3.easeLinear)
-         .duration(2000)
+         .duration(3000)
          .attrTween('transform', function(){
            return d3.interpolateString( `rotate(0)`, `rotate(360)` )
          })
-         .transition()
-         .ease(d3.easeLinear)
-         .duration(0)
-         .attr('transform' , "rotate(0)")
-         .transition()
-         .ease(d3.easeLinear)
-         .duration(1500)
-         .attr('transform' , "rotate(-300)")
-         .on("end", spin_geary);
+         .on("end", function(){
+            spin_geary(".gears_rotate")
+         });
        }
 
-       spin_geary();
-
-       function animateTriangle(){
-            d3.select("#g_rotate")
-                .transition()
-                .duration(2500)
-                .attr('transform' , "rotate(-180)")
-
-                .transition() //And rotate back again
-                .duration(2500)
-                .attr('transform' , "rotate(-180)")
-                .on("end", animateTriangle);  //at end, call it again to create infinite loop
-        }
-
-        //And just call the animateTriangle function now
-        animateTriangle();
+       spin_geary(".gears_rotate");
 
 
-       // end guidodiepen.nl
+       //gears[0]["group"] = create_gear(gears[0]["x"], gears[0]["y"]);
 
+       //spinGear(gears[0]);
 
-
-
-
-       gears[0]["group"] = create_gear(gears[0]["x"], gears[0]["y"]);
-
-       spinGear(gears[0]);
-
-       function spinGear(gear)
-       {
-
-        svg.append('circle')
-                  .attr("transform", `translate(${gear["x"]}, ${gear["y"]})`)
-                  .attr('r', 3)
-                  .attr('stroke', 'red')
-                  .attr('fill', 'red');
-
-           gear["group"]
-                .attr("transform", `translate(0, 0)`)
-               .transition()
-               .ease(d3.easeLinear)
-               .duration(1000)
-
-            //   .attr("transform", `translate(${gear["cx"]},${gear["cy"]}) rotate(${Math.floor(Math.random() * 360)})`)
-            //   .attr("transform", `translate(${gear["x"]}, ${gear["y"]}) rotate(-620)`)
-            //   .transition()
-            //   .duration(2000)
-            //   .attr("transform", `translate(${gear["x"]}, ${gear["y"]}) rotate(720)`);;
-               //+.attr("transform", `translate(${gear["x"]}, ${gear["y"]})`)
-               .attrTween('transform', function(){
-                 return d3.interpolateString( `rotate(0,${gear_size["width"]/2},${gear_size["height"]/2})`, `rotate(60,${gear_size["width"]/2},${gear_size["height"]/2})` )
-               })
-               .on("end", function(){
-                 spinGear(gear);
-               });
-
-       }
 
 
 
