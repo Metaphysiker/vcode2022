@@ -97,15 +97,7 @@ export default class extends Controller {
                     //.attr("transform", `translate(${gears[0]["x"]}, ${gears[0]["y"]})`)
                     ;
 
-      var group3 = group2
-                 .append("svg:image")
-                 //.attr("transform", `translate(${-gear_size["width"]/2}, ${-gear_size["height"]/2})`)
-                 .attr('id', "group3")
-                 .attr('width', gear_size.width)
-                 .attr('height', gear_size.height)
-                 .style("cursor", "pointer")
-                 .style("opacity", 1)
-                 .attr("xlink:href", gearUrl);
+
 
      var group4 = group2
                 .append("svg:image")
@@ -121,11 +113,26 @@ export default class extends Controller {
        function spin_geary(){
          var random_number = Math.floor(Math.random() * 360);
 
+         //console.log("random_number");
+        // console.log(random_number);
+
+        //random_number = 360;
+
          d3.select("#group2")
          .transition()
          .ease(d3.easeLinear)
-         .duration(500)
-         .attr('transform' , "rotate(" +random_number+")")
+         .duration(2000)
+         .attrTween('transform', function(){
+           return d3.interpolateString( `rotate(0)`, `rotate(360)` )
+         })
+         .transition()
+         .ease(d3.easeLinear)
+         .duration(0)
+         .attr('transform' , "rotate(0)")
+         .transition()
+         .ease(d3.easeLinear)
+         .duration(1500)
+         .attr('transform' , "rotate(-300)")
          .on("end", spin_geary);
        }
 
