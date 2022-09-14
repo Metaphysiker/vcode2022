@@ -58,6 +58,21 @@ export default class extends Controller {
     let gearUrl = this.gearUrlValue;
     let durationSpeed = 500;
 
+    let gear_size = {
+      width: 50,
+      height: 50
+    }
+
+    let gears = [
+      {
+        x: box.width/100 * 50,
+        y: box.height/100 * 33,
+        cx: box.width/100 * 50 + gear_size.width/2,
+        cy: box.height/100 * 33 + gear_size.height/2,
+        group: undefined
+      }
+    ]
+
     // append the svg object to the body of the page
      const svg = d3.select(this.animationFieldTarget)
        .append("svg")
@@ -66,59 +81,53 @@ export default class extends Controller {
        .append("g")
        .attr("transform", `translate(${0}, ${margin.top})`);
 
-        append_gear1();
+       gears[0]["group"] = create_gear(box.width/100 * 50, box.height/100 * 33);
 
-        function append_gear1() {
-          return new Promise(function(final_resolve, final_reject){
+       spinGear(gears[0]);
 
-            var coordinates = {
-              x: box.width/100 * 10,
-              y: box.height/100 * 66
-            }
+       function spinGear(gear)
+       {
+         
+           gear["group"]
+               .transition()
+               .duration(2000)
+               .attrTween('transform', function(){
+                 return d3.interpolateString( `rotate(0,${gear["cx"]},${gear["cy"]})`, `rotate(360,${gear["cx"]},${gear["cy"]})` )
+               })
 
-            var gear_size = {
-              width: 25,
-              height: 25
-            }
+       }
 
-            svg.append('circle')
-              .attr('cx', coordinates.x + gear_size.width/2)
-              .attr('cy', coordinates.y + gear_size.height/2)
-              .attr('r', 2)
-              .attr('stroke', 'black')
-              .attr('fill', '#69a3b2');
 
-          const gear1 = svg.append('g')
-            .attr("transform", `translate(${coordinates.x + gear_size.width/2}, ${coordinates.y + gear_size.height/2})`)
-            .append("svg:image")
-            .attr('width', gear_size.width)
-            .attr('height', gear_size.height)
-            .style("cursor", "pointer")
-            .style("opacity", 0)
-            .attr("xlink:href", gearUrl)
-            .transition()
-                  .duration(durationSpeed)
-                  .style("opacity", 1)
-            //.transition()
-                  //.duration(3000)
-                  //.attr("transform", `rotate(-90, ${box.width/2}, ${coordinates.y + gear_size.height/2})`)
-                  //.on("end", function() {final_resolve()});
 
-          //gear1.attr("transform", `translate(${box.width/100 * 1}, ${box.height/100 * 66}) rotate(2)`);
+       function create_gear(x,y){
+         console.log("create_gear");
+         console.log(x);
+         console.log(y);
 
-                function turnNeedle()
-                {
-                    gear1
-                        .transition()
-                        .duration(2000)
-                        .attr('transform', `translate(0 0) rotate(-29 0 0)`)
-                        //.attr("transform", `rotate(350)`);
-                }
+         var gear_group = svg. append('g')
+                            .attr("transform", `translate(${x}, ${y})`);
 
-                turnNeedle();
+         gear_group.append('circle')
+                  .attr("transform", `translate(${gear_size.width/2}, ${gear_size.height/2})`)
+                  .attr('r', 3)
+                  .attr('stroke', 'black')
+                  .attr('fill', 'black');
 
-          }) // end promise
-        } // end append_first_gear
+          gear_group.append("svg:image")
+                     //.attr("transform", `translate(${x}, ${y})`)
+                     .attr('width', gear_size.width)
+                     .attr('height', gear_size.height)
+                     .style("cursor", "pointer")
+                     .style("opacity", 0)
+                     .attr("xlink:href", gearUrl)
+                     .transition()
+                           .duration(durationSpeed)
+                           .style("opacity", 1);
+
+
+         return gear_group;
+       }
+
 
   } //end of draw
 }
