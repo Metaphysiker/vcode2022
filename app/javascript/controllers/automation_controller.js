@@ -99,10 +99,10 @@ export default class extends Controller {
 
 
 
-     var group4 = group2
+     var group3 = group2
                 .append("svg:image")
                 .attr("transform", `translate(${-gear_size["width"]/2}, ${-gear_size["height"]/2})`)
-                .attr('id', "group4")
+                .attr('id', "group3")
                 .attr('width', gear_size.width)
                 .attr('height', gear_size.height)
                 .style("cursor", "pointer")
