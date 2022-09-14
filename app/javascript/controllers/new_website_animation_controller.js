@@ -33,9 +33,7 @@ export default class extends Controller {
   }
 
   resize({ width }) {
-    console.log(this.currentWidthValue);
-    console.log(width);
-    console.log(this.currentWidthValue !== width)
+
     if(this.drawnValue && (this.currentWidthValue !== width)){
       console.log("WIDTH IS NOT SAME!");
       this.draw();
@@ -44,7 +42,7 @@ export default class extends Controller {
   }
 
   draw(){
-    console.log("draw");
+
     this.drawnValue = true;
     this.animationFieldTarget.innerHTML = "";
     let margin = {top: 5, right: 5, bottom: 5, left: 5};
