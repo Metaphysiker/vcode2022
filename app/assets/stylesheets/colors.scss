@@ -1,0 +1,32 @@
+@import "variables";
+
+@mixin background-color-modifiers {
+  @each $name, $hex in $main-colors {
+    &-#{$name} {
+      background-color: $hex !important;
+      //@extend .p-2 !optional;
+    }
+  }
+}
+
+@mixin text-color-modifiers {
+  @each $name, $hex in $main-colors {
+    &-#{$name} {
+      color: $hex !important;
+    }
+  }
+}
+
+.application-bg {
+  background: linear-gradient(135deg, map-get($main-colors, "a-color"), map-get($main-colors, "b-color"));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bg {
+  @include background-color-modifiers;
+}
+
+.text {
+  @include text-color-modifiers;
+}

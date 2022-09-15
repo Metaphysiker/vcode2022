@@ -1,0 +1,26 @@
+@import "variables";
+
+@mixin button-modifiers {
+  @each $name, $hex in $main-colors {
+    &-#{$name} {
+      background-color: $hex !important;
+      @extend .btn !optional;
+      @extend .btn-lg !optional;
+      @extend .fw-bold !optional;
+      color: white;
+      font-size: 1rem;
+      @extend .my-2 !optional;
+
+      &:hover{
+        transform: scale(1.05);
+        color: white;
+        @extend .border-0 !optional;
+        background-color: darken($hex, 10%) !important;
+      }
+    }
+  }
+}
+
+.primary-button {
+  @include button-modifiers;
+}
