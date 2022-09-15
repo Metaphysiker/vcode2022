@@ -59,8 +59,8 @@ export default class extends Controller {
     let durationSpeed = 5000;
 
     let gear_size = {
-      width: 50,
-      height: 50
+      width: box.width/100 * 20,
+      height: box.height/100 * 20
     }
 
     let gears_y = box.height/100 * 66;
@@ -148,7 +148,7 @@ export default class extends Controller {
 
          group2.append('circle')
                   .attr("transform", `translate(0,0)`)
-                  .attr('r', 3)
+                  .attr('r', box.height/100 * 1.2)
                   .attr('stroke', 'black')
                   .attr('fill', 'black');
 
