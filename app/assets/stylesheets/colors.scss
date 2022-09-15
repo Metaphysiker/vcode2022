@@ -18,7 +18,7 @@
 }
 
 .application-bg {
-  background: linear-gradient(135deg, map-get($main-colors, "a-color"), map-get($main-colors, "b-color"));
+  background: linear-gradient(90deg, map-get($main-colors, "a-color"), map-get($main-colors, "b-color"));
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

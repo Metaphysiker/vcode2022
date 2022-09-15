@@ -30,5 +30,5 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 de:
-  application_name_html: "<i>Webapplikationen - Räss</i>"
+  application_name_html: "Webapplikationen - Räss"
   hello: "Hallo Welt"
