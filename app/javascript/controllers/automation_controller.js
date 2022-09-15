@@ -54,7 +54,7 @@ export default class extends Controller {
     let height = width; //this.animationFieldTarget.offsetHeight; //width;
     this.animationFieldTarget.style.height = width + "px";
 
-    let box = {width: width/1.5, height: width/1.5};
+    let box = {width: width/1.2, height: width/1.2};
     let gearUrl = this.gearUrlValue;
     let durationSpeed = 5000;
 
@@ -63,13 +63,45 @@ export default class extends Controller {
       height: 50
     }
 
+    let gears_y = box.height/100 * 66;
+
     let gears = [
       {
         x: box.width/100 * 50,
-        y: box.height/100 * 33,
+        y: gears_y,
         cx: box.width/100 * 50 + gear_size.width/2,
-        cy: box.height/100 * 33 + gear_size.height/2,
+        cy: gears_y + gear_size.height/2,
         id: "gear_1",
+        class: "gears",
+        rotating_class: "gears_rotate",
+        group: undefined
+      },
+      {
+        x: box.width/100 * 75,
+        y: gears_y,
+        cx: box.width/100 * 75 + gear_size.width/2,
+        cy: gears_y + gear_size.height/2,
+        id: "gear_2",
+        class: "gears",
+        rotating_class: "gears_rotate",
+        group: undefined
+      },
+      {
+        x: box.width/100 * 25,
+        y: gears_y,
+        cx: box.width/100 * 25 + gear_size.width/2,
+        cy: gears_y + gear_size.height/2,
+        id: "gear_3",
+        class: "gears",
+        rotating_class: "gears_rotate",
+        group: undefined
+      },
+      {
+        x: box.width/100 * 100,
+        y: gears_y,
+        cx: box.width/100 * 100 + gear_size.width/2,
+        cy: gears_y + gear_size.height/2,
+        id: "gear_3",
         class: "gears",
         rotating_class: "gears_rotate",
         group: undefined
@@ -85,9 +117,19 @@ export default class extends Controller {
        .attr("transform", `translate(${0}, ${margin.top})`);
 
 
+       var assembly_line = svg.append('g')
+                            .append('rect')
+                            .attr('x', box.width/100 * 25 - gear_size.width/2)
+                            .attr('y', gears_y - gear_size.height/1.5)
+                            .attr('width', box.width)
+                            .attr('height', 2.5)
+                            .attr('stroke', 'black')
+                            .attr('fill', 'black');
+
+
        for (let i = 0; i < gears.length; i++) {
          var group1 = svg.append('g')
-                      .attr("transform", `translate(${gears[0]["x"]}, ${gears[0]["y"]})`)
+                      .attr("transform", `translate(${gears[i]["x"]}, ${gears[i]["y"]})`)
                       ;
 
         var group2 = group1.append('g')
@@ -117,7 +159,7 @@ export default class extends Controller {
        function spin_geary(selector){
          var random_number = Math.floor(Math.random() * 360);
 
-         d3.select(selector)
+         d3.selectAll(selector)
          .transition()
          .ease(d3.easeLinear)
          .duration(3000)
