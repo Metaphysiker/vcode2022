@@ -1,7 +1,71 @@
 <%= render "layouts/navigation" %>
 
 <main class="container">
-  <div class="card p-3 my-3 bg-e-color text-center">
+  <h1 class="display-5 fw-bold my-3 text-e-color"><%= t("application_name_html") %></h1>
+  <hr />
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <h2 class="text-white">Webseiten erstellen</h2>
+
+      <p class="">
+        <ul>
+            <li>
+                Webseiten
+            </li>
+            <li>
+                Automatisieren
+            </li>
+            <li>
+                Testen
+            </li>
+            <li>
+                SEO
+            </li>
+        </ul>
+      </p>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <%= render "stimuli/new_website_animation" %>
+
+    </div>
+  </div>
+
+  <div class="p-5 bg-light rounded-3 my-3">
+    <div class="container-fluid py-1">
+      <h1 class="display-5 fw-bold mb-3"><%= t("application_name_html") %></h1>
+
+      <div class="row">
+          <div class="col-sm-12 col-md-8 mb-5">
+            <p class="fs-4">
+              <ul>
+                  <li>
+                      Webseiten
+                  </li>
+                  <li>
+                      Automatisieren
+                  </li>
+                  <li>
+                      Testen
+                  </li>
+                  <li>
+                      SEO
+                  </li>
+              </ul>
+            </p>
+            <button class="btn btn-primary btn-lg" type="primary-button">Termin vereinbaren</button>
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <%= render "stimuli/new_website_animation" %>
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="card bg-transparent text-white p-3 my-3 text-center">
 
     <div class="card-body">
       <h1 class="mt-2">
@@ -24,7 +88,7 @@
 
   <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 g-4">
   <div class="col">
-    <div class="card h-100  bg-e-color">
+    <div class="card h-100 ">
       <div class="card-body">
         <h5 class="card-title text-center">Ich brauche eine Webseite</h5>
         <hr />
