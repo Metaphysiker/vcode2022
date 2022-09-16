@@ -7,7 +7,7 @@ export default class extends Controller {
   static values = { index: Number, drawn: Boolean, currentWidth: Number, svgUrl: String, cardTextUrl: String, listTaskUrl: String, imageUrl: String, textCenterUrl: String }
 
   connect() {
-    this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth; + "px";
+    this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth + "px";
 
     this.currentWidthValue = this.animationFieldTarget.offsetWidth;
 
@@ -52,7 +52,7 @@ export default class extends Controller {
     let height = width; //this.animationFieldTarget.offsetHeight; //width;
     this.animationFieldTarget.style.height = width + "px";
 
-    let box = {width: width/1.5, height: width/1.5};
+    let box = {width: width/1.1, height: width/1.1};
     let svgUrl = this.svgUrlValue;
     let cardTextUrl = this.cardTextUrlValue;
     let listTaskUrl = this.listTaskUrlValue;
