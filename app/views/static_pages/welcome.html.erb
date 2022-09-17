@@ -3,37 +3,13 @@
 <main class="container">
   <h1 class=" text-center display-5 fw-bold my-3 text-e-color"><%= t("application_name_html") %></h1>
   <hr />
-  <div class="row vh-100">
-    <div class="h-100 col-12 col-sm-12 col-md-6 ">
 
-      <div class="h-25">
+  <%= render "sections/new_website" %>
 
-      </div>
+  <hr />
+  <%= render "sections/new_website" %>
 
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title">Webseite</h2>
-          <p class="card-text text-justify">
-
-            Brauchen Sie eine Webseite mit bestimmten Funktionen und Features?
-
-
-          </p>
-          <!--
-          <p class="card-text text-center">
-            <i class="bi bi-arrow-right" style="font-size: 3rem;"></i>
-          </p>
-          -->
-        </div>
-      </div>
-
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <%= render "stimuli/new_website_animation" %>
-
-    </div>
-  </div>
-
+<hr />
   <div class="p-5 bg-light rounded-3 my-3">
     <div class="container-fluid py-1">
       <h1 class="display-5 fw-bold mb-3"><%= t("application_name_html") %></h1>
