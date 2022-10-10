@@ -190,9 +190,9 @@ export default class extends Controller {
          .style("font-size", width/33)
          .style('fill', 'white')
          .style("opacity", 0)
-         .attr("x", box.width/100 * 10)
+         .attr("x", box.width/100 * 5)
          .attr("y", box.height/100 * 5)
-         .text("Report 1")
+         .text("Report 202")
          .transition()
                .duration(durationSpeed)
                .style("opacity", 1);
