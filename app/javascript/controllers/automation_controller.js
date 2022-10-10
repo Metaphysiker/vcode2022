@@ -173,6 +173,30 @@ export default class extends Controller {
 
        spin_geary(".gears_rotate");
 
+       svg.append('rect')
+         .attr("x", 0)
+         .attr("y", 0)
+         .attr('width', 0)
+         .attr('height', 0)
+         .attr('fill', 'white')
+         .transition()
+           .duration(durationSpeed)
+           .attr('width', box.width/3)
+           .attr('height', box.height/2)
+           .attr("fill", "#69a3b2");
+
+       svg.append("text")
+         .attr("font-weight", 500)
+         .style("font-size", width/33)
+         .style('fill', 'white')
+         .style("opacity", 0)
+         .attr("x", box.width/100 * 10)
+         .attr("y", box.height/100 * 5)
+         .text("Report 1")
+         .transition()
+               .duration(durationSpeed)
+               .style("opacity", 1);
+
 
        //gears[0]["group"] = create_gear(gears[0]["x"], gears[0]["y"]);
 
