@@ -4,7 +4,7 @@ import { useIntersection, useResize } from 'stimulus-use'
 
 export default class extends Controller {
   static targets = [ "name", "output", "animationField" ]
-  static values = { index: Number, drawn: Boolean, currentWidth: Number, gearUrl: String, cardTextUrl: String, pieChartUrl: String }
+  static values = { index: Number, drawn: Boolean, currentWidth: Number, gearUrl: String, cardTextUrl: String, pieChartUrl: String, diagramUrl: String, barChartUrl: String }
 
   connect() {
     this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth; + "px";
@@ -58,6 +58,8 @@ export default class extends Controller {
     let gearUrl = this.gearUrlValue;
     let cardTextUrl = this.cardTextUrlValue;
     let pieChartUrl = this.pieChartUrlValue;
+    let diagramUrl = this.diagramUrlValue;
+    let barChartUrl = this.barChartUrlValue;
 
     let durationSpeed = 5000;
 
@@ -66,7 +68,7 @@ export default class extends Controller {
       height: box.height/100 * 20
     }
 
-    let gears_y = box.height/100 * 66;
+    let gears_y = box.height/100 * 100;
 
     let gears = [
       {
@@ -238,6 +240,19 @@ export default class extends Controller {
      .style("cursor", "pointer")
      .style("opacity", 0)
      .attr("xlink:href", pieChartUrl)
+     .transition()
+                   .duration(durationSpeed)
+                   .style("opacity", 1)
+                   .on("end", function() {});
+
+     report.append("svg:image")
+     .attr("x", box.width/100 * 5)
+     .attr("y", box.height/100 * 35)
+     .attr('width', box.width/100 * 10)
+     .attr('height', box.height/100 * 10)
+     .style("cursor", "pointer")
+     .style("opacity", 0)
+     .attr("xlink:href", diagramUrl)
      .transition()
                    .duration(durationSpeed)
                    .style("opacity", 1)
