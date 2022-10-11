@@ -4,7 +4,7 @@ import { useIntersection, useResize } from 'stimulus-use'
 
 export default class extends Controller {
   static targets = [ "name", "output", "animationField" ]
-  static values = { index: Number, drawn: Boolean, currentWidth: Number, gearUrl: String }
+  static values = { index: Number, drawn: Boolean, currentWidth: Number, gearUrl: String, cardTextUrl: String, pieChartUrl: String }
 
   connect() {
     this.animationFieldTarget.style.height = this.animationFieldTarget.offsetWidth; + "px";
@@ -56,6 +56,9 @@ export default class extends Controller {
 
     let box = {width: width/1.2, height: width/1.2};
     let gearUrl = this.gearUrlValue;
+    let cardTextUrl = this.cardTextUrlValue;
+    let pieChartUrl = this.pieChartUrlValue;
+
     let durationSpeed = 5000;
 
     let gear_size = {
@@ -173,19 +176,24 @@ export default class extends Controller {
 
        spin_geary(".gears_rotate");
 
-       svg.append('rect')
+       var report = svg.append('g')
+       .attr("x", 0)
+       .attr("y", 0);
+
+       report.append('rect')
+        // .attr("fill", "#69a3b2")
          .attr("x", 0)
          .attr("y", 0)
-         .attr('width', 0)
-         .attr('height', 0)
-         .attr('fill', 'white')
-         .transition()
-           .duration(durationSpeed)
-           .attr('width', box.width/3)
-           .attr('height', box.height/2)
-           .attr("fill", "#69a3b2");
+         .attr('width', box.width/3)
+         .attr('height', box.height/2)
+         .attr('fill', '#69a3b2');
+        // .transition()
+        //   .duration(durationSpeed)
+        //   .attr('width', box.width/3)
+        //   .attr('height', box.height/2)
+        //   .attr("fill", "#69a3b2");
 
-       svg.append("text")
+       report.append("text")
          .attr("font-weight", 500)
          .style("font-size", width/33)
          .style('fill', 'white')
@@ -197,12 +205,52 @@ export default class extends Controller {
                .duration(durationSpeed)
                .style("opacity", 1);
 
+       report.append("text")
+         .attr("font-weight", 500)
+         .style("font-size", width/33)
+         .style('fill', 'white')
+         .style("opacity", 0)
+         .attr("x", box.width/100 * 5)
+         .attr("y", box.height/100 * 5)
+         .text("Report 202")
+         .transition()
+               .duration(durationSpeed)
+               .style("opacity", 1);
 
+       report.append("svg:image")
+       .attr("x", box.width/100 * 5)
+       .attr("y", box.height/100 * 7.5)
+       .attr('width', box.width/100 * 20)
+       .attr('height', box.height/100 * 20)
+       .style("cursor", "pointer")
+       .style("opacity", 0)
+       .attr("xlink:href", cardTextUrl)
+       .transition()
+                     .duration(durationSpeed)
+                     .style("opacity", 1)
+                     .on("end", function() {});
+
+     report.append("svg:image")
+     .attr("x", box.width/100 * 5)
+     .attr("y", box.height/100 * 25)
+     .attr('width', box.width/100 * 10)
+     .attr('height', box.height/100 * 10)
+     .style("cursor", "pointer")
+     .style("opacity", 0)
+     .attr("xlink:href", pieChartUrl)
+     .transition()
+                   .duration(durationSpeed)
+                   .style("opacity", 1)
+                   .on("end", function() {});
        //gears[0]["group"] = create_gear(gears[0]["x"], gears[0]["y"]);
 
        //spinGear(gears[0]);
 
-
+       report
+       .transition()
+       .duration(5000)
+       .ease(d3.easeLinear)
+       .attr("transform",`translate(${box.width},0)`);;
 
 
        function create_gear(x,y){
