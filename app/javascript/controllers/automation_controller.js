@@ -234,7 +234,7 @@ export default class extends Controller {
 
      report.append("svg:image")
      .attr("x", box.width/100 * 5)
-     .attr("y", box.height/100 * 25)
+     .attr("y", box.height/100 * 28)
      .attr('width', box.width/100 * 10)
      .attr('height', box.height/100 * 10)
      .style("cursor", "pointer")
@@ -247,7 +247,7 @@ export default class extends Controller {
 
      report.append("svg:image")
      .attr("x", box.width/100 * 5)
-     .attr("y", box.height/100 * 35)
+     .attr("y", box.height/100 * 38)
      .attr('width', box.width/100 * 10)
      .attr('height', box.height/100 * 10)
      .style("cursor", "pointer")
